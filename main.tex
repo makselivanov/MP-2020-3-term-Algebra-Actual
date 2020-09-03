@@ -1,0 +1,348 @@
+\documentclass[10pt,a4paper,oneside]{book}
+\usepackage[a4paper,includeheadfoot,top=10mm,bottom=10mm,left=10mm,right=10mm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{cmap} % Поддержка поиска русских слов в PDF (pdflatex)
+\usepackage{comment}
+%\usepackage{pdfsync} % синхронизация
+
+\usepackage{amsmath,amsthm,amssymb,amscd,array}
+\usepackage{latexsym}
+\usepackage{stmaryrd} % Для знака нормальной подгруппы
+\usepackage{misccorr} % российская полиграфия
+\usepackage{indentfirst}% Красная строка в первом абзаце
+\usepackage{ccaption} % Заголовки таблиц и рисунков
+\usepackage{fancyhdr} % колонтитулы
+\usepackage{hyperref} % гиперссылки
+
+\usepackage{rotating} % Поворот текста
+\usepackage{graphicx} % Вставка изображений
+\usepackage{xcolor}
+\usepackage{pgf}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{arrows,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks}
+\graphicspath{ {./} } % относительно main.tex
+
+\usepackage{arydshln} % штрихованные линии в массивах
+\usepackage{mathtools} % выравнивание в матрицах
+\usepackage{multirow} % слияние в столбце
+\usepackage{multicol} % нумерация в нескольких колонках
+
+
+\newtheorem{uprz}{\color{violet!100!black} Упражнение}
+\newtheorem{predl}{\color{blue!50!black} Предложение}
+\newtheorem{komment}{\color{green!50!blue} Комментарий}
+\newtheorem{conj}{Гипотеза}
+\newtheorem{notation}{\color{yellow!30!red} Обозначение}
+
+
+\theoremstyle{definition}
+\newtheorem{kit}{Кит}
+\newtheorem*{rem}{\color{green!50!blue}Замечание}
+\newtheorem{zad}{\color{violet!100!black}Задача}
+\newtheorem*{defn}{\color{yellow!30!red} Определение}
+\newtheorem*{fact}{Факт}
+\newtheorem{thm}{\color{red!40!black}Теорема}
+\newtheorem*{thmm}{\color{red!40!black} Теорема}
+\newtheorem{lem}{\color{green!50!black}Лемма}
+\newtheorem{cor}{\color{green!45!black}Следствие}
+\newtheorem{utvr}{\color{blue!50!black}Утверждение}
+
+
+\newcommand\tikznode[3][]%
+   {\tikz[remember picture,baseline=(#2.base)]
+      \node[minimum size=0pt,outer sep=0pt,#1](#2){#3};%
+   }
+\tikzset{>=stealth}
+
+
+\hypersetup{
+    colorlinks,
+    linkcolor={blue!50!black},
+    citecolor={blue!50!black},
+    urlcolor={red!80!black}
+}
+% цвета для ссылок
+
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\proofname}{Доказательство}
+\renewcommand{\mod}{\,\operatorname{mod}\,}
+\renewcommand{\Re}{\operatorname{Re}}
+\newcommand{\mf}[1]{\mathfrak{#1}}
+\newcommand{\mcal}[1]{\mathcal{#1}}
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\tbf}[1]{\textbf{#1}}
+\newcommand{\ovl}{\overline}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\K}{\operatorname{K_0}}
+\newcommand{\witt}{\operatorname{W}}
+\newcommand{\gw}{\operatorname{GW}}
+\newcommand{\coh}{\operatorname{H}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\cl}{\operatorname{Cl}}
+\newcommand{\Vol}{\operatorname{Vol}}
+\newcommand\tgg{\mathop{\rm tg}\nolimits}
+\newcommand\ccup{\mathop{\cup}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\rk}{\operatorname{rk}}
+\DeclareMathOperator{\Coker}{Coker}
+\DeclareMathOperator{\Ker}{Ker}
+\newcommand{\im}{\operatorname{Im}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\re}{\operatorname{Re}}
+\newcommand{\tr}{\operatorname{Tr}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\orb}{\operatorname{\mathcal O}}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\Inn}{\operatorname{Inn}}
+\newcommand{\Out}{\operatorname{Out}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\SO}{\operatorname{SO}}
+\renewcommand{\O}{\operatorname{O}}
+\renewcommand{\U}{\operatorname{U}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Adj}{\operatorname{Adj}}
+\newcommand{\Disc}{\operatorname{Disc}}
+\newcommand{\cnt}{\operatorname{cont}}
+\newcommand{\Frob}{\operatorname{Frob}}
+\newcommand{\Iso}{\operatorname{Iso}}
+\newcommand{\Isom}{\operatorname{Isom}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\di}{\mathop{\,\scalebox{0.85}{\raisebox{-1.2pt}[0.5\height]{\vdots}}\,}}
+\newcommand{\ndi}{\mathop{\not\scalebox{0.85}{\raisebox{-1.2pt}[0.5\height]{\vdots}}\,}}
+\newcommand{\nequiv}{\not \equiv}
+\newcommand{\Nod}{\operatorname{\text{НОД}}}
+\newcommand{\Nok}{\operatorname{\text{НОК}}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\codim}{\operatorname{codim}}
+\newcommand{\Aff}{\operatorname{Aff}}
+\newcommand{\AGL}{\operatorname{AGL}}
+\newcommand{\PSL}{\operatorname{PSL}}
+\newcommand{\Volume}{\operatorname{Volume}}
+
+\def\llq{\textquotedblleft} 
+\def\rrq{\textquotedblright} 
+\def\exm{\noindent {\bf Примеры:}}
+
+
+\def\Cb{\ovl{C}}
+\def\ffi{\varphi}
+\def\pa{\partial}
+\def\V{\bf V}
+\def\La{\Lambda}
+\def\eps{\varepsilon}
+\def\del{\delta}
+\def\Del{\Delta}
+\def\A{\EuScript{A}}
+\def\lan{\left\langle }
+\def\ran{\right\rangle}
+\def\bar{\begin{array}}
+\def\ear{\end{array}}
+\def\beq{\begin{equation}}
+\def\eeq{\end{equation}}
+\def\thrm{\begin{thm}}
+\def\ethrm{\end{thm}}
+\def\dfn{\begin{defn}}
+\def\edfn{\end{defn}}
+\def\lm{\begin{lem}}
+\def\elm{\end{lem}}
+\def\zd{\begin{zad}}
+\def\ezd{\end{zad}}
+\def\prdl{\begin{predl}}
+\def\eprdl{\end{predl}}
+\def\crl{\begin{cor}}
+\def\ecrl{\end{cor}}
+\def\rm{\begin{rem}}
+\def\erm{\end{rem}}
+\def\fct{\begin{fact}}
+\def\efct{\end{fact}}
+\def\enm{\begin{enumerate}}
+\def\eenm{\end{enumerate}}
+\def\pmat{\begin{pmatrix}}
+\def\epmat{\end{pmatrix}}
+\def\utv{\begin{utvr}}
+\def\eutv{\end{utvr}}
+\def\upr{\begin{uprz}}
+\def\eupr{\end{uprz}}
+\def\nrml{\trianglelefteqslant}
+
+\frenchspacing
+\righthyphenmin=2
+%\usepackage{floatflt}
+\captiondelim{. }
+
+\title{Современное программирование \\ 
+Конспект по алгебре, 3 семестр}
+\date{}
+
+
+\begin{document}
+
+\tableofcontents
+
+\chapter{Линейная алгебра}
+
+\section{Кватернионы}
+
+
+Наша цель сейчас рассказать про геометрию трехмерного пространства используя при этом определённые алгебраические конструкции. А именно, ещё в XIX веке Уильям Роуэн Гамильтон стал искать аналогичную комплексным числам алгебраическую систему на трёхмерном пространстве.  
+Однако, подходящий аналог удалось найти только в четырёхмерной ситуации.
+
+
+Рассмотрим вещественное подпространство в алгебре матриц $M_2(\mb C)$ вида
+$$\mb H = \left\{\pmat \alpha & \beta \\ -\ovl{\beta} & \ovl{\alpha} \epmat \right\}.$$
+Базис этого пространства, как вещественного векторного пространства, состоит из матриц 
+$$ 1=\pmat 1 & 0 \\ 0& 1 \epmat, i= \pmat i & 0 \\ 0& -i \epmat, j=\pmat 0& 1 \\ -1 & 0 \epmat, k=\pmat 0 & i \\ i & 0\epmat. $$ 
+Покажем, что это вещественная подалгебра в $M_2(\mb C)$ и следовательно ассоциативное кольцо. 
+Для этого достаточно показать, что произведение базисных снова лежит в $\mb H$. Имеем $$i^2=j^2=k^2=-1 \text{ и } ij=k=-ji,$$ откуда $$ik= iij=-j=jii=-ki \text{ и } jk=-jjk=-i=-kj.$$ Таким образом $\mb H$ образует ассоциативную алгебру размерности 4 над $\mb R$.
+ 
+\dfn[Алгебра кватернионов] $\mb H$ называется алгеброй кватернионов. 
+\edfn
+Мы больше не будем думать (кроме одного нюанса) про кватернионы как про матрицы, а будем записывать их через $i,j,k$. Именно так обычно кватернионы и вводят -- как формальный суммы $a+bi+cj+dk$, для произведения которых выполнены тождества $i^2=j^2=k^2=-1$ и $ij=-ji=k$. Посмотрев на кватернионы как на матрицы мы сэкономили на доказательстве ассоциативности умножения.
+
+\zd Алгебра кватернионов не снабжается структурой $\mb C$-алгебры.
+\ezd
+
+
+
+
+
+
+\dfn[Векторная и скалярная часть, сопряжённый кватернион] Пусть $x= a+bi+cj+dk$ кватернион. Определим вещественную или скалярную часть $\Re x=a$ и векторную часть $v= bi+cj+dk$ кватерниона. Сопряжённым кватернионом называется $\ovl{x}= a-bi-cj-dk= \Re x - \Im x =a-v$. 
+\edfn
+
+
+
+Посмотрим, как перемножаются кватернионы. Если оба кватерниона  $x$, $y$ разделить на скалярную и векторную части $x=a+v$, $y=b+u$ то $xy=ab+au+bv+ vu$. Нам осталось разобраться с умножением векторных частей. 
+
+Рассмотрим произведение двух чисто мнимых кватернионов $uv=-\lan u,v\ran+[u,v]$. Его вещественная часть совпадает с минус скалярным произведением векторов. Про мнимую часть мы поговорим отдельно.
+
+\dfn[Векторное произведение] Пусть $u,v \in \mb R^3$ два вектора. Тогда их векторным произведением называется вектор $[u,v]$.
+\edfn
+
+Если расписать в координатах $u=x_1i+x_2j+x_3k$ и  $v=y_1i+y_2j+y_3k$, то векторное произведение задаётся формулой
+
+$$[u,v]= (x_2y_3-x_3y_2)i + (x_3y_1-x_1y_3)j + (x_1y_2- x_2y_1)k= \begin{vmatrix} i& j&k \\ x_1 & x_2 & x_3 \\ y_1 & y_2 & y_3 \end{vmatrix} $$
+
+\rm Операция $(u,v) \to [u,v]$ является билинейной и антисимметричной, то есть $[u,u]=0$ и, следовательно, $[u,v]=-[v,u]$.
+\erm
+
+Последнее замечание позволяет нам легко вычислить $x \ovl{x}= a^2+ \lan v,v \ran$. Это приводит нас к определению:
+
+\dfn[Норма кватерниона] Определим норму кватерниона как $$\|x\|=\sqrt{x\ovl{x}}=\sqrt{ a^2+b^2+c^2+d^2}=\sqrt{\ovl{x}x}.$$
+\edfn 
+
+
+Норма кватерниона, как и модуль комплексного числа всегда положительны для ненулевых элементов. Это позволяет заметить, что
+
+\dfn[Обратный кватернион] Если $0\neq x \in \mb H$, то $x^{-1}=\frac{\ovl{x}}{\|x\|^2}$. 
+\edfn
+
+Таким образом мы получили первый (и для нас единственный) пример некоммутативного кольца с делением. Такие кольца называются телами. Напоминаю, что алгебра для нас ассоциативна и с единицей. Неассоциативные алгебры представляют интерес. Например, можно взять $\mb R^3$, где в качестве умножения взято векторное произведение. Это пример неассоциативной алгебры или, точнее, алгебры Ли. В этом курсе мы не  обсуждаем неассоциативные алгебры в связи с тем, что им обычно находится применение либо внутри физических дисциплин, либо внутри самой математики и редко где ещё. 
+
+Какие ещё свойства есть у отображения нормы? Если следовать параллели с комплексными числами, то стоит посмотреть, что происходит с нормой произведения. Для того, чтобы не обременяться вычислениями сделаем небольшой трюк и на секунду вспомним матричное представление кватернионов. Заметим, что на матричном языке, норма -- это $\|x\|=\sqrt{\det x}$, откуда получаем
+
+\lm[Норма мультипликативна] $\|xy\|=\|x\|\|y\|$. В частности, $\|x^{-1}\|=\|x\|^{-1}$.
+\proof Вспомним в последний раз, что кватернионы задаются матрицами из $M_2(\mb C)$. Пусть 
+$$x=\pmat \alpha & \beta \\ -\ovl{\beta} & \ovl{\alpha}\epmat.$$
+Тогда $$\|x\|^2=|\alpha|^2+|\beta|^2=\det \pmat \alpha & \beta \\ -\ovl{\beta} & \ovl{\alpha}\epmat,$$
+а определитель мультипликативен.
+\endproof
+\elm
+
+
+
+Продолжим. Используя мультипликативность нормы легко доказать 
+\lm Отображение $x \to \ovl{x}$ является антиизоморфизмом алгебр, то есть $\ovl{ab}=\ovl{b}\ovl{a}$.
+\proof Линейной ясна. Пусть $x,y \neq 0$. Тогда $$\frac{\ovl{y}\,\ovl{x}}{\|y\|^2\|x\|^2}=y^{-1}x^{-1}=(xy)^{-1}=\frac{\ovl{xy}}{\|xy\|^2}.$$
+\elm
+
+На самом деле и здесь можно было воспользоваться матричным представлением. А именно, можно заметить, что операция сопряжения кватернионов совпадает на этом языке с транспонированием и сопряжением соответствующей комплексной матрицы. Вернёмся теперь к векторному произведению.
+
+
+
+
+
+\lm[Свойства векторного произведения] Верны следующие свойства\\
+1) Для любых $u,v \in \mb R^3$ верно $u\bot [u,v]$. Точнее $$u[u,v]= -\|u\|^2v+ \lan u,v\ran u$$
+2) $\| [u,v]\|= \|u\|\|v\| \cdot |\sin \ffi |$, где $\ffi$ --  это угол между $u$ и $v$.
+\elm
+\proof Для того, чтобы посчитать скалярное произведение $\lan u, [u,v]\ran$ необходимо посчитать скалярную часть $u[u,v]$. 
+$$u[u,v]= u (uv+ \lan u,v \ran)= u^2 v+ \lan u,v \ran u= -\|u\|^2 v+ \lan u,v \ran u$$
+Последнее выражение, очевидно, чисто векторное.
+Теперь
+\begin{align*}
+&\|[u,v]\|^2= -[u,v][u,v]= (uv + \lan u,v\ran)(vu + \lan u,v\ran)=\\
+&=\|u\|^2\|v\|^2+ \lan u,v\ran^2 + \lan u,v\ran (uv+vu)=\|u\|^2\|v\|^2 - \lan u,v\ran^2= \|u\|^2\|v\|^2(1-\cos^2 \ffi)
+\end{align*}
+\endproof
+
+\dfn Обозначим за $\mb H_{1}$ группу кватернионов, по норме равных единице.
+\edfn
+
+\thrm Отображение $\mb H_{1}\to \GL_3(\mb R)$ заданное по правилу $x\to (y \to xyx^{-1})$ корректно определено и даёт сюръективный  гомоморфизм из группы кватернионов единичной нормы в $\SO_3(\mb R)$. Ядро этого гомоморфизма состоит из $\{\pm 1\}$. Точнее, если единичный кватернион $x$  представим в виде $x=a+bv$, то соответствующее ему вращение есть вращение относительно  оси $\lan v \ran$ на угол $2\ffi$, где $\cos \ffi= a$, $\sin \ffi= b$ или тождественное преобразование в случае $v=\pm 1$.
+\ethrm
+\proof Рассмотрим преобразование $L_x \colon \mb H \to \mb H$ вида $y \to xyx^{-1}$. Прежде всего покажем, что мы получили ортогональное преобразование $\mb R^4$. Имеем
+ $$\|xvx^{-1}\|=\|x\| \|v\| \|x^{-1}\| = \|v\|.$$
+Теперь заметим, что преобразование $L_x$ сохраняет на месте вектор 1 и, следовательно, его ортогональное дополнение, то есть $\mb R^3$. Таким образом $L_x$ ограничивается на $\mb R^3$. Далее, очевидно, $L_xL_y= L_{xy}$. Осталось посчитать ядро гомоморфизма и явный вид отображения $L_x$. Заметим, что если $x=a+bv$, то $L_x$ оставляет $v$ на месте. Действительно, при $b\neq 0$ 
+$$xbvx^{-1}=x(x-a)x^{-1}= x-a=bv.$$
+Вычислим угол поворота. Для этого рассмотрим нормированный вектор  $u\bot v$ и $[u,v]$, которые образуют ортонормированный базис дополнения и посчитаем $xux^{-1}$ и $x[u,v]x^{-1}$. Из условия ортогональности следует, что $uv=[u,v]=-[v,u]=-vu$ и аналогично
+\begin{align*}
+xux^{-1}&=(a+bv)u(a-bv)= (a+bv)(au-buv])=\\
+&=a^2u -ab[u,v]+ab[v,u]- b^2vuv=a^2u-2ab[u,v]-b^2\|v\|^2u=\\ &=(a^2-b^2)u-2ab[u,v]=\cos2\ffi u+ \sin 2\ffi [u,v]
+\\
+\\
+x[u,v]x^{-1}&=(a+bv)[u,v](a-bv)= (a[u,v]+bu)(a-bv)=\\
+&=a^2[u,v]+abu-ab[u,v]v-b^2uv=\\
+&=(a^2-b^2)[u,v]+2abu=\cos 2\ffi[u,v]+\sin 2\ffi u
+\end{align*}
+
+Осталось показать, что только $x=\pm 1$ лежит в ядре этого отображения. Это возможно только тогда, когда $2\ffi \equiv 0 \mod 2\pi$. Значит $\ffi=2 \pi$ или $\ffi= \pi$. Первое соответствует $x=1$. Втораое --  $a=\cos \ffi = -1$, а $b=\sin \ffi = 0$, то есть $x=-1$. 
+\endproof
+
+
+\zd
+Покажите, что отображение $(x,y) \to (z \to xzy^{-1})$ задаёт сюръективный гомоморфизм из декартового квадрата группы единичных кватернионов в группу $\SO_4(\mb R)$ с ядром $\{(1,1),(-1,-1)\}$.
+\ezd
+
+Обсудим теперь для чего могут понадобится кватернионы. Каждый кватернион, как мы установили кодирует вращение трёхмерного пространства или, что тоже самое -- новую декартову систему координат в $\mb R^3$ с центром в нуле. Такой тип данных встречается в компьютерной графике, если вы хотите зафиксировать ракурс, в котором вы смотрите на 3d-сцену или положение какого-то конкретного объекта в такой сцене.
+
+В такой задаче кватернионы сложно превзойти. Действительно, задание сцены при помощи кватернионов очень экономно -- 4 коэффициента с одним соотношением на них (3 коэффициента, если очень нужно) против 9 коэффициентов у ортогональной матрицы.
+
+А что с эффективностью операций? Тут вопрос состоит в том, про какие операции идёт речь. Если вы хотите сказать, что тот или иной вектор, который был повёрнут на кватернион $q=a+v$ надо повернуть ещё на кватернион $p=b+u$, то вам надо всего лишь вычислить $pq=ab+au+bv+uv$. Такое произведение считается за 16 умножений и 12 сложений. Если брать произведение матриц $3\times 3$, то там получается 27 умножений и 18 сложений (можно обойтись и 23 умножениями, но сильно увеличив число сложений).
+
+Можно конечно использовать углы Эйлера, но тогда придётся использовать для вычислений косинусы и синусы этих углов, которые сами даются не бесплатно.
+
+Если вам даны два ракурса в виде кватернионов, то легко понять, на какой кватернион надо домножить, чтобы из первого получить второй.
+
+Но что если вы хотите просто повернуть при помощи кватерниона какой-то вектор из $\mb R^3$. Тут ситуация несколько хуже. Для этого вам необходимо посчитать $qxq^{-1}$. Предположив, что $q$ нормирован можно заменить обращение на сопряжение. Тем не менее такой подход довольно дорог -- 32 умножения и 24 сложения. Конечно, такой способ не оптимален. Например, не обязательно считать скалярную часть -- она должна стать нулевой. На самом деле, если $q=a+v$, то 
+$$qxq^{-1}=x+ 2[v, [v,x]+ ax]$$
+что даёт 15 умножений и 15 сложений (если считать умножение на 2 сложением). Это конечно отличается от матриц, где необходимо 9 умножений и 6 сложений.
+
+Впрочем, отличается не сильно. Кроме того у кватернионного представления есть плюс произведение нескольких кватернионов -- это кватернион несмотря на ошибки округления. Что не так для ортогональных матриц.
+
+Наконец, представим себе задачу, что нам нужно плавно перейти от ракурса $q$ к ракурсу $p$. Желательно с "равномерной" скоростью. На языке кватернионов это становится понятно. Для этого заметим, что единичные кватернионы -- это всего лишь точки на трёхмерной сфере. Несложно понять, что их соединяет часть дуги сферы, точки на которой заданы как 
+$$ \frac{\sin(t\theta)p + \sin ((1-t)\theta) q}{\sin \theta},$$
+где $\theta$ -- угол между $p$ и $q$ (острый, не забываем, что представление кватернионами немного не однозначно).
+
+\end{document}
